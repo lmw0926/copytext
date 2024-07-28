@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>複製到剪貼板範例</title>
+    <title>動態顯示和複製到剪貼板</title>
     <style>
         .copy-button {
             padding: 10px 20px;
@@ -23,6 +23,7 @@
     </style>
 </head>
 <body>
+    <div id="display-text"></div> <!-- 用於顯示動態擷取的文字 -->
     <textarea id="text-to-copy" class="copy-text" readonly></textarea>
     <button class="copy-button" onclick="copyToClipboard()">複製到剪貼板</button>
 
@@ -48,6 +49,7 @@
             var textToCopy = getParameterByName('text');
             if (textToCopy) {
                 document.getElementById('text-to-copy').value = textToCopy;
+                document.getElementById('display-text').innerText = textToCopy; // 將動態擷取的文字顯示在網頁上
             }
         }
     </script>
