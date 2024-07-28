@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>複製到剪貼板範例</title>
+    <style>
+        .copy-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            color: #fff;
+            background-color: #007BFF;
+            border-radius: 5px;
+        }
+        .copy-button:hover {
+            background-color: #0056b3;
+        }
+        .copy-text {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <textarea id="text-to-copy" class="copy-text" readonly></textarea>
+    <button class="copy-button" onclick="copyToClipboard()">複製到剪貼板</button>
+
+    <script>
+        function getParameterByName(name) {
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var url = window.location.href;
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        function copyToClipboard() {
+            var copyText = document.getElementById("text-to-copy");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
+            document.execCommand("copy");
+        }
+
+        window.onload = function() {
+            var textToCopy = getParameterByName('text');
+            if (textToCopy) {
+                document.getElementById('text-to-copy').value = textToCopy;
+            }
+        }
+    </script>
+</body>
+</html>
