@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>複製按鈕範例</title>
+    <style>
+        .copy-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            color: #fff;
+            background-color: #007BFF;
+            border-radius: 5px;
+        }
+        .copy-button:hover {
+            background-color: #0056b3;
+        }
+        #copy-message {
+            display: none;
+            margin-top: 10px;
+            font-size: 14px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="display-text">這是需要複製的文字。</div>
+    <button class="copy-button" onclick="copyToClipboard()">複製到剪貼簿</button>
+    <div id="copy-message">已複製</div>
+
+    <script>
+        function copyToClipboard() {
+            var textToCopy = document.getElementById('display-text').innerText;
+            navigator.clipboard.writeText(textToCopy).then(function() {
+                var message = document.getElementById('copy-message');
+                message.style.display = 'block';
+                setTimeout(function() {
+                    message.style.display = 'none';
+                }, 2000); // 2秒後隱藏消息
+            }, function(err) {
+                console.error('無法複製文字: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
