@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iframe 頁面</title>
+</head>
+<body>
+    <h1>iframe 頁面</h1>
+    <div id="messageBox">這裡會顯示動態數據</div>
+
+    <script>
+        window.addEventListener('message', function(event) {
+            var messageBox = document.getElementById('messageBox');
+            messageBox.textContent = event.data;
+        }, false);
+    </script>
+</body>
+</html>
