@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>動態顯示和複製到剪貼板</title>
+    <style>
+        .copy-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            color: #fff;
+            background-color: #007BFF;
+            border-radius: 5px;
+        }
+        .copy-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="display-text"></div> <!-- 用於顯示動態擷取的文字 -->
+    <button class="copy-button" onclick="copyToClipboard()">複製到剪貼板</button>
+
+    <script>
+        function getParameterByName(name) {
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var url = window.location.href;
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        function copyToClipboard() {
+            var textToCopy = document.getElementById('display-text').innerText;
+            navigator.clipboard.writeText(textToCopy).then(function() {
+                alert('文字已複製到剪貼板');
+            }, function(err) {
+                console.error('無法複製文字: ', err);
+            });
+        }
+
+        window.onload = function() {
+            var textToCopy = getParameterByName('text');
+            if (textToCopy) {
+                document.getElementById('display-text').innerText = textToCopy; // 將動態擷取的文字顯示在網頁上
+            }
+        }
+    </script>
+</body>
+</html>
