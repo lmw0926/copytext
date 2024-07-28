@@ -17,11 +17,18 @@
         .copy-button:hover {
             background-color: #0056b3;
         }
+        #copy-message {
+            display: none;
+            margin-top: 10px;
+            font-size: 14px;
+            color: green;
+        }
     </style>
 </head>
 <body>
     <div id="display-text"></div> <!-- 用於顯示動態擷取的文字 -->
     <button class="copy-button" onclick="copyToClipboard()">複製到剪貼板</button>
+    <div id="copy-message">已複製</div> <!-- 顯示“已複製”消息 -->
 
     <script>
         function getParameterByName(name) {
@@ -37,7 +44,11 @@
         function copyToClipboard() {
             var textToCopy = document.getElementById('display-text').innerText;
             navigator.clipboard.writeText(textToCopy).then(function() {
-                alert('文字已複製到剪貼板');
+                var message = document.getElementById('copy-message');
+                message.style.display = 'block';
+                setTimeout(function() {
+                    message.style.display = 'none';
+                }, 2000); // 2秒後隱藏消息
             }, function(err) {
                 console.error('無法複製文字: ', err);
             });
