@@ -1,0 +1,94 @@
+好的，下面是改良過的範例，按鈕按下後會顯示「已複製」消息，並在2秒後自動消失：
+
+```html
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>複製按鈕範例</title>
+    <style>
+        .copy-button {
+            background-color: #007bff; /* 藍色背景 */
+            color: white; /* 白色文字 */
+            border: none; /* 無邊框 */
+            border-radius: 5px; /* 圓角 */
+            padding: 8px 16px; /* 內邊距 */
+            cursor: pointer; /* 鼠標指針樣式 */
+            font-size: 14px; /* 字體大小 */
+            transition: background-color 0.3s; /* 背景顏色過渡效果 */
+        }
+        .copy-button:hover {
+            background-color: #0056b3; /* 鼠標懸停時背景顏色 */
+        }
+        .code-block {
+            background-color: #e0f7fa; /* 淺藍色背景 */
+            padding: 10px; /* 內邊距 */
+            border-radius: 5px; /* 圓角 */
+            position: relative; /* 位置設定 */
+            margin-bottom: 10px; /* 下邊距 */
+        }
+        .copy-alert {
+            display: none; /* 隱藏提示 */
+            position: absolute; /* 絕對定位 */
+            top: 50%; /* 垂直居中 */
+            left: 50%; /* 水平居中 */
+            transform: translate(-50%, -50%); /* 居中對齊 */
+            background-color: #007bff; /* 藍色背景 */
+            color: white; /* 白色文字 */
+            padding: 8px 16px; /* 內邊距 */
+            border-radius: 5px; /* 圓角 */
+            font-size: 14px; /* 字體大小 */
+            z-index: 1000; /* 保持在頂層 */
+        }
+    </style>
+</head>
+<body>
+    <div class="code-block">
+        請告訴我如何在手機上設置鬧鐘，提醒我在[特定時間]起床！
+        <br>例如：請告訴我如何在手機上設置鬧鐘，提醒我在早上6:30起床！
+        <button class="copy-button" onclick="copyToClipboard(this, '請告訴我如何在手機上設置鬧鐘，提醒我在[特定時間]起床！\\n例如：請告訴我如何在手機上設置鬧鐘，提醒我在早上6:30起床！')">複製到剪貼簿</button>
+        <div class="copy-alert">已複製</div>
+    </div>
+    
+    <div class="code-block">
+        請給我一些健康又美味的早餐建議！
+        <br>例如：請給我一些健康又美味的早餐建議，比如適合學生日常吃的選擇！
+        <button class="copy-button" onclick="copyToClipboard(this, '請給我一些健康又美味的早餐建議！\\n例如：請給我一些健康又美味的早餐建議，比如適合學生日常吃的選擇！')">複製到剪貼簿</button>
+        <div class="copy-alert">已複製</div>
+    </div>
+
+    <!-- 添加其他區塊和按鈕 -->
+    
+    <script>
+        function copyToClipboard(button, text) {
+            navigator.clipboard.writeText(text).then(function() {
+                showCopyAlert(button);
+            }, function(err) {
+                console.error('複製到剪貼簿失敗:', err);
+            });
+        }
+
+        function showCopyAlert(button) {
+            var alertBox = button.nextElementSibling;
+            alertBox.style.display = 'block';
+            setTimeout(function() {
+                alertBox.style.display = 'none';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
+```
+
+### 說明：
+1. **CSS**：
+    - `.copy-button`：設置了按鈕的樣式。
+    - `.code-block`：設置了每個區塊的樣式。
+    - `.copy-alert`：設置了複製提示的樣式，包括隱藏、絕對定位和居中對齊。
+
+2. **JavaScript**：
+    - `copyToClipboard(button, text)`：這個函數將文本複製到剪貼簿，並調用 `showCopyAlert` 函數顯示提示。
+    - `showCopyAlert(button)`：這個函數顯示複製成功的提示，並在2秒後自動隱藏。
+
+這段代碼應該可以在網頁上運行，並在按下按鈕後顯示「已複製」的提示。你可以將這段代碼複製到你的 HTML 文件中，並在瀏覽器中查看效果。
