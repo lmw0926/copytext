@@ -32,6 +32,14 @@
     <div id="copy-message">已複製</div> <!-- 顯示“已複製”消息 -->
 
     <script>
+
+        
+        function sendMessageToIframe() {
+            var iframe = document.getElementById('contentFrame');
+            var message = '這是來自父頁面的動態數據！';
+            iframe.contentWindow.postMessage(message, '*');
+        }
+        
         function getParameterByName(name) {
             name = name.replace(/[\[\]]/g, "\\$&");
             var url = window.location.href;
