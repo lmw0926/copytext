@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>複製按鈕範例</title>
+    <style>
+        .copy-button {
+            background-color: #007bff; /* 藍色背景 */
+            color: white; /* 白色文字 */
+            border: none; /* 無邊框 */
+            border-radius: 5px; /* 圓角 */
+            padding: 8px 16px; /* 內邊距 */
+            cursor: pointer; /* 鼠標指針樣式 */
+            font-size: 14px; /* 字體大小 */
+            transition: background-color 0.3s; /* 背景顏色過渡效果 */
+        }
+        .copy-button:hover {
+            background-color: #0056b3; /* 鼠標懸停時背景顏色 */
+        }
+        .code-block {
+            background-color: #e0f7fa; /* 淺藍色背景 */
+            padding: 10px; /* 內邊距 */
+            border-radius: 5px; /* 圓角 */
+            position: relative; /* 位置設定 */
+            margin-bottom: 10px; /* 下邊距 */
+        }
+    </style>
+</head>
+<body>
+    <div class="code-block">
+        請告訴我如何在手機上設置鬧鐘，提醒我在[特定時間]起床！
+        <br>例如：請告訴我如何在手機上設置鬧鐘，提醒我在早上6:30起床！
+        <button class="copy-button" onclick="copyToClipboard('請告訴我如何在手機上設置鬧鐘，提醒我在[特定時間]起床！\\n例如：請告訴我如何在手機上設置鬧鐘，提醒我在早上6:30起床！')">複製到剪貼簿</button>
+    </div>
+    
+    <div class="code-block">
+        請給我一些健康又美味的早餐建議！
+        <br>例如：請給我一些健康又美味的早餐建議，比如適合學生日常吃的選擇！
+        <button class="copy-button" onclick="copyToClipboard('請給我一些健康又美味的早餐建議！\\n例如：請給我一些健康又美味的早餐建議，比如適合學生日常吃的選擇！')">複製到剪貼簿</button>
+    </div>
+
+    <!-- 添加其他區塊和按鈕 -->
+    
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).catch(function(err) {
+                console.error('複製到剪貼簿失敗:', err);
+            });
+        }
+    </script>
+</body>
+</html>
