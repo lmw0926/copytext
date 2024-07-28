@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>複製按鈕</title>
+    <title>複製按鈕範例</title>
     <style>
         .copy_coupon {
             padding: 10px 20px;
@@ -13,30 +13,15 @@
             color: #fff;
             background-color: #007BFF;
             border-radius: 5px;
-            position: relative;
         }
         .copy_coupon:hover {
             background-color: #0056b3;
         }
-        .copy-message {
-            display: none;
-            margin-top: 10px;
-            font-size: 14px;
-            color: green;
-            position: absolute;
-            top: -30px;
-            right: 0;
-            background: #fff;
-            border: 1px solid #007BFF;
-            border-radius: 3px;
-            padding: 5px 10px;
-        }
     </style>
 </head>
 <body>
-    <input value="用 中文/英文 解釋以下英文單字：填入一個或多個單字。請用表格的方式呈現，並且表格內須包含單字、詞性、解釋與例句。" style="display:none;"/>
-    <button class="copy_coupon">copy</button>
-    <div class="copy-message">已複製</div>
+    <input value="122342456" style="display:none;"/>
+    <button class="copy_coupon">【123456】點擊複製數字</button>
 
     <script src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
     <script>
@@ -89,11 +74,11 @@
                 value = $this.prev("input").val();
             window.Clipboard.copy(value);
 
-            var message = $this.next(".copy-message");
-            message.show();
+            var originalText = $this.text();
+            $this.text("copied");
             setTimeout(function() {
-                message.hide();
-            }, 2000); // 2秒後隱藏消息
+                $this.text(originalText);
+            }, 2000); // 2秒後恢復原來的文字
         });
     </script>
 </body>
