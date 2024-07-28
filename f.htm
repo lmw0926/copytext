@@ -14,7 +14,8 @@
     <script>
         function sendMessageToIframe() {
             var iframe = document.getElementById('contentFrame');
-            var message = '這是來自父頁面的動態數據！';
+            //var message = '這是來自父頁面的動態數據！';
+            var display-text = '這是來自父頁面的動態數據！';
             iframe.contentWindow.postMessage(message, '*');
         }
     </script>
