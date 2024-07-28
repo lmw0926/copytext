@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>複製按鈕</title>
+    <style>
+        .copy_coupon {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            color: #fff;
+            background-color: #007BFF;
+            border-radius: 5px;
+            position: relative;
+        }
+        .copy_coupon:hover {
+            background-color: #0056b3;
+        }
+        .copy-message {
+            display: none;
+            margin-top: 10px;
+            font-size: 14px;
+            color: green;
+            position: absolute;
+            top: -30px;
+            right: 0;
+            background: #fff;
+            border: 1px solid #007BFF;
+            border-radius: 3px;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <input value="用 中文/英文 解釋以下英文單字：填入一個或多個單字。請用表格的方式呈現，並且表格內須包含單字、詞性、解釋與例句。" style="display:none;"/>
+    <button class="copy_coupon">copy</button>
+    <div class="copy-message">已複製</div>
+
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
+    <script>
+        window.Clipboard = (function(window, document, navigator) {
+            var textArea, copy;
+
+            function isOS() {
+                return navigator.userAgent.match(/ipad|iphone/i);
+            }
+
+            function createTextArea(text) {
+                textArea = document.createElement('textArea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+            }
+
+            function selectText() {
+                var range, selection;
+
+                if (isOS()) {
+                    range = document.createRange();
+                    range.selectNodeContents(textArea);
+                    selection = window.getSelection();
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                    textArea.setSelectionRange(0, 999999);
+                } else {
+                    textArea.select();
+                }
+            }
+
+            function copyToClipboard() {
+                document.execCommand("Copy");
+                document.body.removeChild(textArea);
+            }
+
+            copy = function(text) {
+                createTextArea(text);
+                selectText();
+                copyToClipboard();
+            };
+
+            return {
+                copy: copy
+            };
+        })(window, document, navigator);
+
+        $(".copy_coupon").on("click", function() {
+            var $this = $(this),
+                value = $this.prev("input").val();
+            window.Clipboard.copy(value);
+
+            var message = $this.next(".copy-message");
+            message.show();
+            setTimeout(function() {
+                message.hide();
+            }, 2000); // 2秒後隱藏消息
+        });
+    </script>
+</body>
+</html>
