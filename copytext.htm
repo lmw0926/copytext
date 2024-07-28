@@ -27,18 +27,13 @@
 </head>
 <body>
     <div id="display-text"></div> <!-- 用於顯示動態擷取的文字 -->
-    <div id="messageBox">這裡會顯示動態數據</div>
+    <div id="messageBox">這裡示動態數據</div>
     <button class="copy-button" onclick="copyToClipboard()">複製到剪貼板</button>
     <div id="copy-message">已複製</div> <!-- 顯示“已複製”消息 -->
 
     <script>
 
-        
-        function sendMessageToIframe() {
-            var iframe = document.getElementById('contentFrame');
-            var message = '這是來自父頁面的動態數據！';
-            iframe.contentWindow.postMessage(message, '*');
-        }
+      
         
         function getParameterByName(name) {
             name = name.replace(/[\[\]]/g, "\\$&");
