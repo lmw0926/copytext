@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>複製按鈕範例</title>
+    <style>
+        .copy_coupon {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            color: #fff;
+            background-color: #007BFF;
+            border-radius: 5px;
+        }
+        .copy_coupon:hover {
+            background-color: #0056b3;
+        }
+        .copy-message {
+            display: none;
+            margin-top: 10px;
+            font-size: 14px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <input id="dynamicInput" type="text" style="display:none;"/>
+    <button class="copy_coupon">點擊複製數字</button>
+    <div class="copy-message">已複製</div>
+
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
+    <script>
+        window.Clipboard = (function(window, document, navigator) {
+            var textArea, copy;
+
+            function isOS() {
+                return navigator.userAgent.match(/ipad|iphone/i);
+            }
+
+            function createTextArea(text) {
+                textArea = document.createElement('textArea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+            }
+
+            function selectText() {
+                var range, selection;
+
+                if (isOS()) {
+                    range = document.createRange();
+                    range.selectNodeContents(textArea);
+                    selection = window.getSelection();
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                    textArea.setSelectionRange(0, 999999);
+                } else {
+                    textArea.select();
+                }
+            }
+
+            function copyToClipboard() {
+                document.execCommand("Copy");
+                document.body.removeChild(textArea);
+            }
+
+            copy = function(text) {
+                createTextArea(text);
+                selectText();
+                copyToClipboard();
+            };
+
+            return {
+                copy: copy
+            };
+        })(window, document, navigator);
+
+        $(".copy_coupon").on("click", function() {
+            var $this = $(this),
+                value = $("#dynamicInput").val(); // 獲取動態輸入的數值
+            window.Clipboard.copy(value);
+
+            var originalText = $this.text();
+            $this.text("copied");
+            setTimeout(function() {
+                $this.text(originalText);
+            }, 2000); // 2秒後恢復原來的文字
+        });
+
+        // 動態設置輸入值
+        function getParameterByName(name) {
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var url = window.location.href;
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        window.onload = function() {
+            var dynamicValue = getParameterByName('value');
+            if (dynamicValue) {
+                document.getElementById('dynamicInput').value = dynamicValue;
+            }
+        };
+    </script>
+</body>
+</html>
