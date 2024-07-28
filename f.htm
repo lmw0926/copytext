@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父頁面</title>
+</head>
+<body>
+    <h1>父頁面</h1>
+    <iframe id="contentFrame" src="iframe.html" width="600" height="400"></iframe>
+    <br>
+    <button onclick="sendMessageToIframe()">動態更新 iframe 內容</button>
+
+    <script>
+        function sendMessageToIframe() {
+            var iframe = document.getElementById('contentFrame');
+            var message = '這是來自父頁面的動態數據！';
+            iframe.contentWindow.postMessage(message, '*');
+        }
+    </script>
+</body>
+</html>
