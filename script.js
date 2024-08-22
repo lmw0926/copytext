@@ -1,13 +1,5 @@
 
 // 圖片數據
-const data = [
-    'https://static.wixstatic.com/media/10732d_09cfd5fa4df74d5c9f49eba60592b28b~mv2.jpg',
-    'https://static.wixstatic.com/media/10732d_53f4bf9441ad4e04b5f47abf1428bbf0~mv2.jpg',
-    'https://static.wixstatic.com/media/10732d_5164296d14fc4631bb27b8c06100bd64~mv2.jpg',
-    'https://static.wixstatic.com/media/10732d_6eba2879929a4ef3964339a43c21109c~mv2.jpg',
-    'https://static.wixstatic.com/media/10732d_6791ff0616984325b5f09120fb6aafe9~mv2.jpg'
-];
-
 // 圖片配對數據，使用兩張不同的圖片進行配對
 const data = [
     { 
