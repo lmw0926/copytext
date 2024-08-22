@@ -95,6 +95,7 @@ function checkWinCondition() {
     }
 }
 
+
 function showCongratulations() {
     // 创建恭喜图片的 overlay
     const overlay = document.createElement('div');
@@ -103,41 +104,48 @@ function showCongratulations() {
     congratsImage.src = 'https://static.wixstatic.com/media/10d41b_d3a1432eb54a4174b4e53994705c335a~mv2.png'; // 替换为实际的恭喜图片路径
     overlay.appendChild(congratsImage);
 
-    // 点击图片时放大图片
+    // 添加点击事件监听器，点击恭喜图片时返回游戏完成画面
     congratsImage.addEventListener('click', () => {
-        // 创建放大图的 overlay
-        const zoomedOverlay = document.createElement('div');
-        zoomedOverlay.className = 'zoomed-image';
-        const zoomedImage = document.createElement('img');
-        zoomedImage.src = congratsImage.src; // 使用相同的图片路径
-        zoomedOverlay.appendChild(zoomedImage);
-        
-        // 创建并添加关闭按钮
-        const closeButton = document.createElement('button');
-        closeButton.className = 'close-button';
-        closeButton.textContent = 'X';
-        zoomedOverlay.appendChild(closeButton);
-
-        // 点击关闭按钮时关闭放大图
-        closeButton.addEventListener('click', () => {
-            document.body.removeChild(zoomedOverlay);
-        });
-
-        // 将 zoomedOverlay 添加到 body
-        document.body.appendChild(zoomedOverlay);
+        document.body.removeChild(overlay);
+        showGameBoard(); // 显示游戏完成画面
     });
 
     // 将 overlay 添加到 body
     document.body.appendChild(overlay);
+}
 
-    // 点击 overlay 时关闭 overlay
-    overlay.addEventListener('click', () => {
-        document.body.removeChild(overlay);
+function showGameBoard() {
+    // 假设游戏完成画面的容器是 #game-board
+    const gameBoard = document.getElementById('game-board');
+    gameBoard.style.display = 'grid'; // 显示游戏画面
+    gameBoard.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', () => {
+            showZoomedImage(card.querySelector('img').src);
+        });
     });
 }
 
+function showZoomedImage(src) {
+    // 创建放大图的 overlay
+    const zoomedOverlay = document.createElement('div');
+    zoomedOverlay.className = 'zoomed-image';
+    const zoomedImage = document.createElement('img');
+    zoomedImage.src = src; // 使用传入的图片路径
+    zoomedOverlay.appendChild(zoomedImage);
+    
+
+    // 点击图片时关闭放大图
+    zoomedImage.addEventListener('click', () => {
+        document.body.removeChild(zoomedOverlay);
+    });
+
+    // 将 zoomedOverlay 添加到 body
+    document.body.appendChild(zoomedOverlay);
+}
+
+// 游戏启动的函数
 function startGame() {
-    // 初始化游戏的代码
+    // 游戏初始化的代码
     // 游戏完成的逻辑中调用 showCongratulations
     // 例如，所有卡片匹配成功后调用：
     // showCongratulations();
