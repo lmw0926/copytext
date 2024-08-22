@@ -3,8 +3,8 @@ const data = [
     'https://static.wixstatic.com/media/10d41b_2e74a0e53ae1426f8eff964cd588fd76~mv2.jpg/v1/fill/w_500,h_750,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/10d41b_2e74a0e53ae1426f8eff964cd588fd76~mv2.jpg',
     'https://static.wixstatic.com/media/10d41b_51df68a706ac4d36b7eceb731c02924b~mv2.jpg/v1/fill/w_500,h_750,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/10d41b_51df68a706ac4d36b7eceb731c02924b~mv2.jpg',
     'https://static.wixstatic.com/media/10d41b_5991830f5a4547e581c6e3c48a8f938c~mv2.jpg/v1/fill/w_500,h_750,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/10d41b_5991830f5a4547e581c6e3c48a8f938c~mv2.jpg',
-    'img1: 'https://static.wixstatic.com/media/10d41b_297e8571a7cd4b5c8f3d99d140c18dc5~mv2.jpg/v1/fill/w_500,h_333,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/10d41b_297e8571a7cd4b5c8f3d99d140c18dc5~mv2.jpg',
-    'img1: 'https://static.wixstatic.com/media/10d41b_b0dfe506e562478b864305cde66f6c6a~mv2.jpg/v1/fill/w_500,h_750,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/10d41b_b0dfe506e562478b864305cde66f6c6a~mv2.jpg'
+    'https://static.wixstatic.com/media/10d41b_297e8571a7cd4b5c8f3d99d140c18dc5~mv2.jpg/v1/fill/w_500,h_333,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/10d41b_297e8571a7cd4b5c8f3d99d140c18dc5~mv2.jpg',
+    'https://static.wixstatic.com/media/10d41b_b0dfe506e562478b864305cde66f6c6a~mv2.jpg/v1/fill/w_500,h_750,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/10d41b_b0dfe506e562478b864305cde66f6c6a~mv2.jpg'
 ];
 
 let gameBoard = document.getElementById('game-board');
