@@ -1,17 +1,17 @@
+
 // 圖片數據
 const data = [
-    'https://static.wixstatic.com/media/10d41b_2e74a0e53ae1426f8eff964cd588fd76~mv2.jpg',
-    'https://static.wixstatic.com/media/10d41b_51df68a706ac4d36b7eceb731c02924b~mv2.jpg',
-    'https://static.wixstatic.com/media/10d41b_5991830f5a4547e581c6e3c48a8f938c~mv2.jpg',
-    'https://static.wixstatic.com/media/10d41b_297e8571a7cd4b5c8f3d99d140c18dc5~mv2.jpg',
-    'https://static.wixstatic.com/media/10d41b_b0dfe506e562478b864305cde66f6c6a~mv2.jpg'
+    'img1.jpg',
+    'img2.jpg',
+    'img3.jpg',
+    'img4.jpg',
+    'img5.jpg'
 ];
 
 let gameBoard = document.getElementById('game-board');
 let cards = [];
 let firstCard, secondCard;
 let lockBoard = false;
-let matchedCards = 0; // 已成功配對的卡片數量
 
 // 初始化遊戲
 function initGame() {
@@ -66,8 +66,6 @@ function checkForMatch() {
 function keepCardsRevealed() {
     firstCard.classList.add('matched');
     secondCard.classList.add('matched');
-    matchedCards += 2; // 增加已成功配對的卡片數量
-    checkWinCondition();
     resetBoard();
 }
 
@@ -83,32 +81,14 @@ function unflipCards() {
     }, 1000);
 }
 
-// 檢查是否全部配對成功
-function checkWinCondition() {
-    if (matchedCards === cards.length) {
-        showCongratulations();
-    }
-}
-
-// 顯示恭喜圖片
-function showCongratulations() {
-    let overlay = document.createElement('div');
-    overlay.classList.add('overlay');
-    let congratsImg = document.createElement('img');
-    congratsImg.src = 'congratulations.jpg'; // 替換為實際的恭喜圖片路徑
-    overlay.appendChild(congratsImg);
-    document.body.appendChild(overlay);
-
-    // 點擊遮罩層時，移除恭喜圖片
-    overlay.addEventListener('click', () => {
-        document.body.removeChild(overlay);
-    });
-}
-
 // 重置遊戲狀態
 function resetBoard() {
     [firstCard, secondCard, lockBoard] = [null, null, false];
 }
+
+// 初始化遊戲
+initGame();
+
 
 // 初始化遊戲
 initGame();
