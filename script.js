@@ -1,27 +1,30 @@
-// 圖片數據
+// 圖片配對數據，使用兩張不同的圖片進行配對
 const data = [
-    'https://static.wixstatic.com/media/10d41b_2e74a0e53ae1426f8eff964cd588fd76~mv2.jpg',
-    'https://static.wixstatic.com/media/10d41b_51df68a706ac4d36b7eceb731c02924b~mv2.jpg',
-    'https://static.wixstatic.com/media/10d41b_5991830f5a4547e581c6e3c48a8f938c~mv2.jpg',
-    'https://static.wixstatic.com/media/10d41b_297e8571a7cd4b5c8f3d99d140c18dc5~mv2.jpg',
-    'https://static.wixstatic.com/media/10d41b_b0dfe506e562478b864305cde66f6c6a~mv2.jpg'
+    { img1: 'https://static.wixstatic.com/media/10d41b_2e74a0e53ae1426f8eff964cd588fd76~mv2.jpg/v1/fill/w_500,h_750,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/10d41b_2e74a0e53ae1426f8eff964cd588fd76~mv2.jpg', img2: 'https://static.wixstatic.com/media/10d41b_3f3f952b2c3f48cd85d9e097ecc2eb00~mv2.jpg/v1/fill/w_500,h_750,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/10d41b_3f3f952b2c3f48cd85d9e097ecc2eb00~mv2.jpg' },
+    { img1: 'https://static.wixstatic.com/media/10d41b_51df68a706ac4d36b7eceb731c02924b~mv2.jpg/v1/fill/w_500,h_750,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/10d41b_51df68a706ac4d36b7eceb731c02924b~mv2.jpg', img2: 'https://static.wixstatic.com/media/10d41b_2c4c815236ed425b97b01102ca76f668~mv2.jpg/v1/fill/w_500,h_750,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/10d41b_2c4c815236ed425b97b01102ca76f668~mv2.jpg' },
+    { img1: 'https://static.wixstatic.com/media/10d41b_5991830f5a4547e581c6e3c48a8f938c~mv2.jpg/v1/fill/w_500,h_750,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/10d41b_5991830f5a4547e581c6e3c48a8f938c~mv2.jpg', img2: 'https://static.wixstatic.com/media/10d41b_a1edfb7e25df4604a87fabc3aab7b488~mv2.jpg/v1/fill/w_500,h_750,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/10d41b_a1edfb7e25df4604a87fabc3aab7b488~mv2.jpg    ' },
+    { img1: 'https://static.wixstatic.com/media/10d41b_297e8571a7cd4b5c8f3d99d140c18dc5~mv2.jpg/v1/fill/w_500,h_333,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/10d41b_297e8571a7cd4b5c8f3d99d140c18dc5~mv2.jpg', img2: 'https://static.wixstatic.com/media/10d41b_7a93291f5ea049dfb8d05dc7d72d4e06~mv2.jpg/v1/fill/w_500,h_333,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/10d41b_7a93291f5ea049dfb8d05dc7d72d4e06~mv2.jpg' },
+    { img1: 'https://static.wixstatic.com/media/10d41b_b0dfe506e562478b864305cde66f6c6a~mv2.jpg/v1/fill/w_500,h_750,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/10d41b_b0dfe506e562478b864305cde66f6c6a~mv2.jpg', img2: 'https://static.wixstatic.com/media/10d41b_c6ed08534460474f958a25898e24ed8d~mv2.jpg/v1/fill/w_500,h_750,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/10d41b_c6ed08534460474f958a25898e24ed8d~mv2.jpg' },
+    { img1: 'https://static.wixstatic.com/media/10d41b_eb2e9190d8ec4c09aa6cb72c5484a2dd~mv2.jpg/v1/fill/w_500,h_750,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/10d41b_eb2e9190d8ec4c09aa6cb72c5484a2dd~mv2.jpg', img2: 'https://static.wixstatic.com/media/10d41b_d60729573afa48039da7bb83d4b3faee~mv2.jpg/v1/fill/w_500,h_750,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/10d41b_d60729573afa48039da7bb83d4b3faee~mv2.jpg' },
 ];
+
 let gameBoard = document.getElementById('game-board');
 let cards = [];
 let firstCard, secondCard;
 let lockBoard = false;
+let matchedCards = 0; // 已成功配对的卡片数量
 
-// 初始化遊戲
+// 初始化游戏
 function initGame() {
-    // 將圖片數據隨機排列
+    // 创建两个卡片组，每组包含两张不同的图片
     let cardArray = [];
-    data.forEach(img => {
-        cardArray.push(img);
-        cardArray.push(img);  // 每個圖片需要兩張
+    data.forEach(pair => {
+        cardArray.push(pair.img1);
+        cardArray.push(pair.img2);
     });
     cardArray.sort(() => Math.random() - 0.5);
 
-    // 創建遊戲卡片
+    // 创建游戏卡片
     cardArray.forEach(img => {
         let card = document.createElement('div');
         card.classList.add('card');
@@ -36,7 +39,7 @@ function initGame() {
     });
 }
 
-// 點擊卡片時的邏輯
+// 点击卡片时的逻辑
 function revealCard() {
     if (lockBoard || this === firstCard || this.classList.contains('matched')) return;
 
@@ -53,21 +56,27 @@ function revealCard() {
     checkForMatch();
 }
 
-// 檢查是否配對成功
+// 检查是否配对成功
 function checkForMatch() {
-    let isMatch = firstCard.dataset.image === secondCard.dataset.image;
+    // 查找这两张图片是否构成有效的配对
+    let isMatch = data.some(pair => 
+        (pair.img1 === firstCard.dataset.image && pair.img2 === secondCard.dataset.image) ||
+        (pair.img2 === firstCard.dataset.image && pair.img1 === secondCard.dataset.image)
+    );
 
     isMatch ? keepCardsRevealed() : unflipCards();
 }
 
-// 如果配對成功，保持卡片顯示
+// 如果配对成功，保持卡片显示
 function keepCardsRevealed() {
     firstCard.classList.add('matched');
     secondCard.classList.add('matched');
+    matchedCards += 2; // 增加已成功配对的卡片数量
+    checkWinCondition();
     resetBoard();
 }
 
-// 如果配對不成功
+// 如果配对不成功
 function unflipCards() {
     lockBoard = true;
     setTimeout(() => {
@@ -76,17 +85,82 @@ function unflipCards() {
         firstCard.classList.remove('revealed');
         secondCard.classList.remove('revealed');
         resetBoard();
-    }, 1000);
+    }, 500);
 }
 
-// 重置遊戲狀態
+// 检查是否全部配对成功
+function checkWinCondition() {
+    if (matchedCards === cards.length) {
+        showCongratulations();
+    }
+}
+
+function showCongratulations() {
+    // 创建恭喜图片的 overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'overlay';
+    const congratsImage = document.createElement('img');
+    congratsImage.src = 'https://static.wixstatic.com/media/10d41b_d3a1432eb54a4174b4e53994705c335a~mv2.png'; // 替换为实际的恭喜图片路径
+    overlay.appendChild(congratsImage);
+
+    // 点击图片时放大图片
+    congratsImage.addEventListener('click', () => {
+        // 创建放大图的 overlay
+        const zoomedOverlay = document.createElement('div');
+        zoomedOverlay.className = 'zoomed-image';
+        const zoomedImage = document.createElement('img');
+        zoomedImage.src = congratsImage.src; // 使用相同的图片路径
+        zoomedOverlay.appendChild(zoomedImage);
+        
+        // 创建并添加关闭按钮
+        const closeButton = document.createElement('button');
+        closeButton.className = 'close-button';
+        closeButton.textContent = 'X';
+        zoomedOverlay.appendChild(closeButton);
+
+        // 点击关闭按钮时关闭放大图
+        closeButton.addEventListener('click', () => {
+            document.body.removeChild(zoomedOverlay);
+        });
+
+        // 将 zoomedOverlay 添加到 body
+        document.body.appendChild(zoomedOverlay);
+    });
+
+    // 将 overlay 添加到 body
+    document.body.appendChild(overlay);
+
+    // 点击 overlay 时关闭 overlay
+    overlay.addEventListener('click', () => {
+        document.body.removeChild(overlay);
+    });
+}
+
+function startGame() {
+    // 初始化游戏的代码
+    // 游戏完成的逻辑中调用 showCongratulations
+    // 例如，所有卡片匹配成功后调用：
+    // showCongratulations();
+}
+
+// 启动游戏
+startGame();
+
+
+function startGame() {
+    // 初始化游戏的代码
+    // 游戏完成的逻辑中调用 showCongratulations
+    // 例如，所有卡片匹配成功后调用：
+    // showCongratulations();
+}
+
+// 启动游戏
+startGame();
+
+// 重置游戏状态
 function resetBoard() {
     [firstCard, secondCard, lockBoard] = [null, null, false];
 }
 
-// 初始化遊戲
-initGame();
-
-
-// 初始化遊戲
+// 初始化游戏
 initGame();
