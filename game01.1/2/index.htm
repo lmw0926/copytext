@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chicken Coop Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="gameArea">
+        <div id="coops">
+            <!-- 生成5间鸡舍 -->
+            <div class="chickenCoop" id="coop1"></div>
+            <div class="chickenCoop" id="coop2"></div>
+            <div class="chickenCoop" id="coop3"></div>
+            <div class="chickenCoop" id="coop4"></div>
+            <div class="chickenCoop" id="coop5"></div>
+        </div>
+        <div id="scoreBoard">
+            <p>得分: <span id="score">0</span></p>
+        </div>
+        <!-- 新增一个用于显示结束消息的元素 -->
+        <div id="endMessage" style="display: none;">
+            <p>小雞都回家囉！</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
